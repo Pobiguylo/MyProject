@@ -3,4 +3,5 @@
     <string name="start">Начать</string>
     <string name="add">Добавить</string>
     <string name="progress">Прогресс</string>
+    <string name="list">Все занятия</string>
 </resources>
