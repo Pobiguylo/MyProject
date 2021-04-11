@@ -3,10 +3,12 @@ package com.example.knead_yourself;
 public class Exercise {
     public String name;
     public String description;
+    public int score;
 
-    public Exercise(String name, String Description) {
+    public Exercise(String name, String description,int score) {
         this.name = name;
-        this.description = Description;
+        this.description = description;
+        this.score = score;
     }
 
     public String getName() {
@@ -23,5 +25,13 @@ public class Exercise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

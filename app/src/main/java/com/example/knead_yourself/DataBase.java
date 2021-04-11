@@ -18,6 +18,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_TRAINING = "NAME";
     public static final String COLUMN_EXERCISE_NAME = "NAME";
     public static final String COLUMN_EXERCISE_DESCRIPTION = "DESCRIPTION";
+    public static final String COLUMN_EXERCISE_SCORE = "SCORE";
 
     DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,7 +34,8 @@ public class DataBase extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_TRAININGS_ID + " INTEGER,"+
                 COLUMN_EXERCISE_NAME+"TEXT,"+
-                COLUMN_EXERCISE_DESCRIPTION+"TEXT);");
+                COLUMN_EXERCISE_DESCRIPTION+"TEXT,"+
+                COLUMN_EXERCISE_SCORE+"INTEGER);");
         db.execSQL(query1);
     }
 

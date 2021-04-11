@@ -12,9 +12,28 @@ public class Trainings implements Serializable {
         this.name = name;
         exercises = new ArrayList<>();
     }
-    public void add(Exercise exercise){
-         this.exercises.add(exercise);
+
+    public long getId() {
+        return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void add(Exercise exercise){
+        this.exercises.add(exercise);
+    }
 }
