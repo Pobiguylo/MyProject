@@ -1,14 +1,16 @@
 package com.example.knead_yourself;
 
 public class Exercise {
-    public String name;
-    public String description;
-    public int score;
-
-    public Exercise(String name, String description,int score) {
+    private String name;
+    private String description;
+    private int score;
+    private long trID;
+    public  long id;
+    public Exercise(String name, String description,int score,long trID) {
         this.name = name;
         this.description = description;
         this.score = score;
+        this.trID =trID;
     }
 
     public String getName() {
@@ -33,5 +35,13 @@ public class Exercise {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

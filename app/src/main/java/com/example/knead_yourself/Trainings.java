@@ -1,24 +1,21 @@
 package com.example.knead_yourself;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Trainings implements Serializable {
-    private long id;
     private String name;
-    ArrayList<Exercise> exercises;
-    public Trainings(long id, String name, ArrayList<Exercise> exercises) {
-        this.id = id;
+    private  long id;
+     private ArrayList<Exercise> exercises;
+    public Trainings( String name, ArrayList<Exercise> exercises) {
         this.name = name;
-        exercises = new ArrayList<>();
+        this.exercises = exercises;
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Trainings( String name) {
+        this.name = name;
+        this.exercises = new ArrayList<>();
     }
 
     public String getName() {
@@ -29,7 +26,7 @@ public class Trainings implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<Exercise> getExercises() {
+    public ArrayList<Exercise> getExercices() {
         return exercises;
     }
 
