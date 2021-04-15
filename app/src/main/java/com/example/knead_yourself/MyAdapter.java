@@ -1,35 +1,46 @@
 package com.example.knead_yourself;
 
+
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.SimpleCursorAdapter;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-public class MyAdapter extends ArrayAdapter<Object> {
-    public Context myContext;
-    public MyAdapter(@NonNull Context context, int resource, @NonNull Object[] objects) {
-        super(context, resource, objects);
-        myContext = context;
+
+public class MyAdapter extends SimpleCursorAdapter {
+
+    public MyAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+        super(context, layout, c, from, to, flags);
     }
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
-            LayoutInflater inflater = LayoutInflater.from(myContext);
-            convertView = inflater.inflate(R.layout.adapter_view,parent,false);
-        }else{
 
-        }
-        Object item = getItem(position);
-        if (item != null){
-            TextView title  =convertView.findViewById(R.id.title);
-            title.setText("");
-        }else{
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        return super.newView(context, cursor, parent);
+    }
 
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        super.bindView(view, context, cursor);
+        ViewHolder holder = (ViewHolder) view.getTag();
+        if (holder == null) {
+            holder = new ViewHolder();
+            holder.colImp = cursor.getColumnIndexOrThrow(DataBase.COLUMN_NAME_TRAINING);
+            holder.listTab = view.findViewById(R.id.listview);
+            view.setTag(holder);
         }
-        return convertView;
+        if (cursor.isFirst()) {
+
+        } else {
+            // add logic for other rows here
+        }
+    }
+
+    static class ViewHolder {
+        int colImp;
+        View listTab;
+
     }
 }

@@ -2,15 +2,11 @@ package com.example.knead_yourself;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
-import java.util.ArrayList;
 
 public class TrainingActivity extends AppCompatActivity {
     ListView listView;
@@ -37,8 +33,8 @@ public class TrainingActivity extends AppCompatActivity {
         // определяем, какие столбцы из курсора будут выводиться в ListView
         String[] headers = new String[] {DataBase.COLUMN_NAME_TRAINING,"_id"};
         // создаем адаптер, передаем в него курсор
-        userAdapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item,
-                userCursor, headers, new int[]{android.R.id.text1}, 0);
+        userAdapter = new MyAdapter(this, R.layout.adapter_view,
+                userCursor, headers, new int[]{R.id.title}, 0);
         listView.setAdapter(userAdapter);
     }
 
