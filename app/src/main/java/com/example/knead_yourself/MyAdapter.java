@@ -3,7 +3,6 @@ package com.example.knead_yourself;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,28 +30,23 @@ public class MyAdapter extends SimpleCursorAdapter {
         this.c.moveToPosition(pos);
         String firstName = this.c.getString(this.c.getColumnIndex(DataBase.COLUMN_NAME_TRAINING));
         ImageView iv =  v.findViewById(R.id.imageTitle);
-
-        if (c != null) {
+        if (firstName != null) {
             // If there is no image in the database "NA" is stored instead of a blob
             // test if there more than 3 chars "NA" + a terminating char if more than
             // there is an image otherwise load the default
-            if(c.equals("Head"))
+            if(firstName.equals("Head"))
             {
                 iv.setImageResource(R.drawable.head);
-            }
-            if(c.equals("Hand"))
+            } else if(firstName.equals("Hand"))
             {
                 iv.setImageResource(R.drawable.hand);
-            }
-            if (c.equals("Eyes")) {
+            } else if (firstName.equals("Eyes")) {
                 iv.setImageResource(R.drawable.eyes);
-            } else{
-                iv.setImageResource(0);
             }
 
+            TextView title =  v.findViewById(R.id.title);
+            title.setText(firstName);
         }
-        TextView title =  v.findViewById(R.id.title);
-        title.setText(firstName);
 
         return(v);
     }
