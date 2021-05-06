@@ -14,7 +14,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
 
-    private static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TRAININGS_ID="TRAININGS_ID";
     public static final String COLUMN_NAME_TRAINING = "NAME";
     public static final String COLUMN_EXERCISE_NAME = "NAME";

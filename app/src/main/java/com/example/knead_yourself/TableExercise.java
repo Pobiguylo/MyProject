@@ -19,6 +19,9 @@ public class TableExercise {
         DataBase EOpenHelper = new DataBase(context);
         EDataBase = EOpenHelper.getWritableDatabase();
     }
+
+
+
     public long insert(Exercise exercise){
         ContentValues cv=new ContentValues();
         cv.put(COLUMN_TRAININGS_ID,exercise.getId());
@@ -35,9 +38,8 @@ public class TableExercise {
         EDataBase.delete(TABLE_EXERCISE, COLUMN_TRAININGS_ID+COLUMN_EXERCISE_NAME+COLUMN_EXERCISE_DESCRIPTION+COLUMN_EXERCISE_SCORE , new String[] { String.valueOf(id) });
     }
 
-    public Exercise select(long id) {
-        Cursor mCursor = EDataBase.query(TABLE_EXERCISE, null, COLUMN_TRAININGS_ID + "id", new String[]{String.valueOf(id)}, null, null, null);
-
+    public  Exercise select(long id) {
+        Cursor mCursor = EDataBase.query(TABLE_EXERCISE, null, COLUMN_TRAININGS_ID , new String[]{String.valueOf(id)}, null, null, null);
         mCursor.moveToFirst();
         String title = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_NAME));
         String description = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_DESCRIPTION));

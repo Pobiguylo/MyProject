@@ -11,8 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class TrainingActivity extends AppCompatActivity {
     ListView listView;
@@ -42,13 +41,8 @@ public class TrainingActivity extends AppCompatActivity {
         userAdapter = new MyAdapter(this, R.layout.adapter_view,
                 userCursor, headers, new int[]{R.id.title}, 0);
         listView.setAdapter(userAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TrainingActivity.this, ExerciseActivity.class);
-                intent.putExtra("idTrainings", id);
-                startActivity(intent);
-            }
-        });
+
+
     }
 
 }
