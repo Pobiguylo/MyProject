@@ -3,15 +3,20 @@ package com.example.knead_yourself;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_NAME;
 public class ExerciseActivity extends AppCompatActivity {
     TextView title;
     TextView description;
     TextView score;
-
     Button cont;
+    DataBase dataBase;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +26,20 @@ public class ExerciseActivity extends AppCompatActivity {
         this.score = findViewById(R.id.score);
         this.cont = findViewById(R.id.cont);
         Intent intent = getIntent();
-        long idGet =(intent.getLongExtra("id",0));
-        title.setText(idGet+"");
-        //String des =  .select(idGet).getDescription();
-       // description.setText(des);
+        long idGet = (intent.getLongExtra("id", 0));
+        db = dataBase.getReadableDatabase();
+         final Cursor c = db.rawQuery("SELECT * FROM TABLE_EXERCISE  WHERE COLUMN_TRAININGS_ID="+ idGet,null);
+         c.moveToFirst();
+
+         cont.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                     String name= c.getString(c.getColumnIndex("COLUMN_EXERCISE_NAME"))+"\n";
+                     title.setText(name);
+                     c.moveToNext();
+             }
+         });
+
+
     }
 }
