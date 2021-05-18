@@ -4,6 +4,15 @@ public class Exercise {
     private String name;
     private String description;
     private int score;
+
+    public long getTrID() {
+        return trID;
+    }
+
+    public void setTrID(long trID) {
+        this.trID = trID;
+    }
+
     private long trID;
     public  long id;
     public Exercise(String name, String description,int score,long trID) {

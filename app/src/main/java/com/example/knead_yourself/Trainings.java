@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 public class Trainings implements Serializable {
     private String name;
+
+    public long getId() {
+        return id;
+    }
+
     private  long id;
      private ArrayList<Exercise> exercises;
     public Trainings( String name, ArrayList<Exercise> exercises) {

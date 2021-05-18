@@ -39,7 +39,7 @@ public class TableExercise {
     }
 
     public  Exercise select(long id) {
-        Cursor mCursor = EDataBase.query(TABLE_EXERCISE, null, COLUMN_TRAININGS_ID , new String[]{String.valueOf(id)}, null, null, null);
+        Cursor mCursor = EDataBase.query(TABLE_EXERCISE, null, COLUMN_TRAININGS_ID  , new String[]{String.valueOf(id)}, null, null, null);
         mCursor.moveToFirst();
         String title = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_NAME));
         String description = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_DESCRIPTION));

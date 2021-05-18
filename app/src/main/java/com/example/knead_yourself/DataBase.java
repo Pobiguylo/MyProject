@@ -10,7 +10,7 @@ import org.json.JSONArray;
 
 public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "trainings.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 12;
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
 
@@ -34,9 +34,9 @@ public class DataBase extends SQLiteOpenHelper {
         String query1 = ("CREATE TABLE " + TABLE_EXERCISE + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_TRAININGS_ID + " INTEGER,"+
-                COLUMN_EXERCISE_NAME+"TEXT,"+
-                COLUMN_EXERCISE_DESCRIPTION+"TEXT,"+
-                COLUMN_EXERCISE_SCORE+"INTEGER);");
+                COLUMN_EXERCISE_NAME+" TEXT,"+
+                COLUMN_EXERCISE_DESCRIPTION+" TEXT,"+
+                COLUMN_EXERCISE_SCORE+" INTEGER);");
         db.execSQL(query1);
 
         ContentValues cv=new ContentValues();
@@ -58,9 +58,10 @@ public class DataBase extends SQLiteOpenHelper {
         cv1.put(COLUMN_EXERCISE_NAME,ex1.getName());
         cv1.put(COLUMN_EXERCISE_DESCRIPTION,ex1.getDescription());
         cv1.put(COLUMN_EXERCISE_SCORE,ex1.getScore());
-        cv1.put(COLUMN_TRAININGS_ID,ex1.getId());
+        cv1.put(COLUMN_TRAININGS_ID,ex1.getTrID());
         tr1.add(ex1);
         long Exid = db.insert(TABLE_EXERCISE,null,cv1);
+        System.out.println(Exid);
 
     }
 

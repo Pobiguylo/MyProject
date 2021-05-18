@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import static com.example.knead_yourself.DataBase.COLUMN_TRAININGS_ID;
+import static com.example.knead_yourself.DataBase.TABLE_EXERCISE;
 import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_NAME;
 public class ExerciseActivity extends AppCompatActivity {
     TextView title;
     TextView description;
     TextView score;
     Button cont;
-    DataBase dataBase;
+    //DataBase dataBase;
     SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +30,23 @@ public class ExerciseActivity extends AppCompatActivity {
         this.cont = findViewById(R.id.cont);
         Intent intent = getIntent();
         long idGet = (intent.getLongExtra("id", 0));
+        DataBase dataBase = new DataBase(this);
         db = dataBase.getReadableDatabase();
-         final Cursor c = db.rawQuery("SELECT * FROM TABLE_EXERCISE  WHERE COLUMN_TRAININGS_ID="+ idGet,null);
+         final Cursor c = db.rawQuery("SELECT * FROM "+TABLE_EXERCISE+"   WHERE "+COLUMN_TRAININGS_ID+"="+ idGet,null);
          c.moveToFirst();
-
          cont.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                     String name= c.getString(c.getColumnIndex("COLUMN_EXERCISE_NAME"))+"\n";
+                 if( c != null  ) {
+                     String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
                      title.setText(name);
                      c.moveToNext();
+                 } else{
+                     c.close();}
              }
          });
 
 
     }
 }
+
