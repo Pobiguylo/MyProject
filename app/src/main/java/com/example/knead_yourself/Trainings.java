@@ -7,13 +7,9 @@ import java.util.ArrayList;
 
 public class Trainings implements Serializable {
     private String name;
-
-    public long getId() {
-        return id;
-    }
-
     private  long id;
-     private ArrayList<Exercise> exercises;
+    private ArrayList<Exercise> exercises;
+
     public Trainings( String name, ArrayList<Exercise> exercises) {
         this.name = name;
         this.exercises = exercises;
@@ -33,6 +29,10 @@ public class Trainings implements Serializable {
 
     public ArrayList<Exercise> getExercices() {
         return exercises;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void add(Exercise exercise){
