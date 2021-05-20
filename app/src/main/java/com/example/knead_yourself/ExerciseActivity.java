@@ -13,12 +13,14 @@ import android.widget.TextView;
 import static com.example.knead_yourself.DataBase.COLUMN_TRAININGS_ID;
 import static com.example.knead_yourself.DataBase.TABLE_EXERCISE;
 import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_NAME;
+import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_DESCRIPTION;
+import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_SCORE;
+
 public class ExerciseActivity extends AppCompatActivity {
     TextView title;
     TextView description;
     TextView score;
     Button cont;
-    //DataBase dataBase;
     SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +36,27 @@ public class ExerciseActivity extends AppCompatActivity {
         db = dataBase.getReadableDatabase();
          final Cursor c = db.rawQuery("SELECT * FROM "+TABLE_EXERCISE+"   WHERE "+COLUMN_TRAININGS_ID+"="+ idGet,null);
          c.moveToFirst();
+         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
+         title.setText(name);
+         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
+         description.setText(desc);
+         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
+         score.setText(scor);
          cont.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 if( c != null  ) {
-                     String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
-                     title.setText(name);
-                     c.moveToNext();
-                 } else{
-                     c.close();}
+                 if (c.moveToNext()) {
+                     if (c != null) {
+                         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
+                         title.setText(name);
+                         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
+                         description.setText(desc);
+                         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
+                         score.setText(scor);
+                     }
+                 } else
+                     finish();
+                     c.close();
              }
          });
 

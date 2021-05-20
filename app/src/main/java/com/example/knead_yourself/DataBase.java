@@ -10,7 +10,7 @@ import org.json.JSONArray;
 
 public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "trainings.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 14;
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
 
@@ -61,8 +61,14 @@ public class DataBase extends SQLiteOpenHelper {
         cv1.put(COLUMN_TRAININGS_ID,ex1.getTrID());
         tr1.add(ex1);
         long Exid = db.insert(TABLE_EXERCISE,null,cv1);
-        System.out.println(Exid);
 
+        Exercise ex2 = new Exercise("Down","slow",10,trID);
+        cv1.put(COLUMN_EXERCISE_NAME,ex2.getName());
+        cv1.put(COLUMN_EXERCISE_DESCRIPTION,ex2.getDescription());
+        cv1.put(COLUMN_EXERCISE_SCORE,ex2.getScore());
+        cv1.put(COLUMN_TRAININGS_ID,ex2.getTrID());
+        tr1.add(ex2);
+        long Exid1 = db.insert(TABLE_EXERCISE,null,cv1);
     }
 
     @Override
