@@ -4,8 +4,8 @@
     <string name="add">Добавить</string>
     <string name="progress">Прогресс</string>
     <string name="list">Все занятия</string>
-    <string name="cont">Продолжить</string>
-    <string name="addTr"> Название тренировки</string>
+    <string name="cont">Дальше</string>
+    <string name="addTr">Название тренировки</string>
     <string name="conTr"> Cоздать тренировку</string>
     <string name="nameEx"> Название упражнения</string>
     <string name="desEx"> Описание упражнения</string>

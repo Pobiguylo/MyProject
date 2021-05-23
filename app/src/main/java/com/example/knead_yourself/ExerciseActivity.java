@@ -56,7 +56,7 @@ public class ExerciseActivity extends AppCompatActivity {
                      }
                  } else
                      finish();
-                     c.close();
+
              }
          });
 

@@ -36,13 +36,13 @@ public class MyAdapter extends SimpleCursorAdapter {
             // If there is no image in the database "NA" is stored instead of a blob
             // test if there more than 3 chars "NA" + a terminating char if more than
             // there is an image otherwise load the default
-            if(trainingName.equals("Head"))
+            if(trainingName.equals("Зарядка для шеи"))
             {
                 iv.setImageResource(R.drawable.head);
-            } else if(trainingName.equals("Hand"))
+            } else if(trainingName.equals("Разминка для рук и плеч"))
             {
                 iv.setImageResource(R.drawable.hand);
-            } else if (trainingName.equals("Eyes")) {
+            } else if (trainingName.equals("Зарядка для глаз")) {
                 iv.setImageResource(R.drawable.eyes);
             }
 

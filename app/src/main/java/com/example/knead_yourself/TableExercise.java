@@ -43,7 +43,7 @@ public class TableExercise {
         mCursor.moveToFirst();
         String title = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_NAME));
         String description = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_DESCRIPTION));
-        int score = mCursor.getInt(Integer.parseInt(COLUMN_EXERCISE_SCORE));
+        String score = mCursor.getString(Integer.parseInt(COLUMN_EXERCISE_SCORE));
 
         return new Exercise(title,description,score,id);
     }
