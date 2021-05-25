@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import static com.example.knead_yourself.DataBase.COLUMN_ID;
 import static com.example.knead_yourself.DataBase.COLUMN_NAME_TRAINING;
 import static com.example.knead_yourself.DataBase.TABLE_NAME;
 
@@ -25,7 +26,7 @@ public class TableTrainings {
     }
 
     public void delete(long id) {
-        TDataBase.delete(TABLE_NAME, COLUMN_NAME_TRAINING + " =? ", new String[] { String.valueOf(id) });
+        TDataBase.delete(TABLE_NAME, COLUMN_ID + " =? ", new String[] { String.valueOf(id) });
     }
     public int update(Trainings trainings) { //ДОДЕЛАТЬ ФУНКЦИЮ АПГРЕЙДА
         ContentValues cv=new ContentValues();

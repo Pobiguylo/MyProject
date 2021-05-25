@@ -32,15 +32,15 @@ public class AddActivity extends AppCompatActivity {
     Button conEx;
     Button end;
     SQLiteDatabase db;
-
+    Trainings trainings;
+    Exercise exercise;
     public class CustomDialogFragment extends DialogFragment {
-
         @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
             return builder
-                    .setTitle("Диалоговое окно")
+                    .setTitle("Вы точно хотите создать тренировку?")
                     .setIcon(R.drawable.gal)
                     .setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
                         @Override
@@ -69,6 +69,9 @@ public class AddActivity extends AppCompatActivity {
         this.conEx = findViewById(R.id.coEx);
         this.end = findViewById(R.id.end);
 
+        DataBase dataBase = new DataBase(this);
+        db = dataBase.getReadableDatabase();
+
         final long[] trID = new long[1];
 
         final ContentValues cv  =new ContentValues();
@@ -81,7 +84,7 @@ public class AddActivity extends AppCompatActivity {
             conTr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Trainings trainings = new Trainings(nameTr.getText().toString());
+                    trainings = new Trainings(nameTr.getText().toString());
                     TableTrainings tableTrainings = new TableTrainings(AddActivity.this);
                     tableTrainings.insert(trainings);
                     cv.put(COLUMN_NAME_TRAINING, trainings.getName());
@@ -96,14 +99,16 @@ public class AddActivity extends AppCompatActivity {
                 conEx.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Exercise exercise = new Exercise(nameEx.getText().toString(), descEx.getText().toString(), scoreEx.getText().toString(), trID[0]);
+                        exercise = new Exercise(nameEx.getText().toString(), descEx.getText().toString(), scoreEx.getText().toString(), trID[0]);
                         TableExercise tableExercise = new TableExercise(AddActivity.this);
                         tableExercise.insert(exercise);
                         cv1.put(COLUMN_EXERCISE_NAME, exercise.getName());
                         cv1.put(COLUMN_EXERCISE_DESCRIPTION, exercise.getDescription());
                         cv1.put(COLUMN_EXERCISE_SCORE, exercise.getScore());
                         cv1.put(COLUMN_TRAININGS_ID, exercise.getTrID());
+                        trainings.add(exercise);
                         long exID = db.insert(TABLE_EXERCISE, null, cv1);
+
                     }
                 });
 

@@ -4,6 +4,7 @@ package com.example.knead_yourself;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,11 @@ public class MyAdapter extends SimpleCursorAdapter {
         this.context = context;
     }
 
+
     @Override
     public View getView(final int pos, View inView, ViewGroup parent) {
         View v = inView;
+        final TableTrainings tableTrainings = new TableTrainings(context);
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.adapter_view, null);
@@ -49,6 +52,16 @@ public class MyAdapter extends SimpleCursorAdapter {
             TextView title =  v.findViewById(R.id.title);
             title.setText(trainingName);
         }
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                c.moveToPosition(pos);
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                long id = MyAdapter.this.c.getLong(MyAdapter.this.c.getColumnIndex(DataBase.COLUMN_ID));
+                tableTrainings.delete(id);
+                return false;
+            }
+        });
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
