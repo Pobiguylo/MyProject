@@ -1,19 +1,25 @@
 package com.example.knead_yourself;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_DESCRIPTION;
 import static com.example.knead_yourself.DataBase.COLUMN_EXERCISE_SCORE;
@@ -34,7 +40,8 @@ public class AddActivity extends AppCompatActivity {
     SQLiteDatabase db;
     Trainings trainings;
     Exercise exercise;
-    public class CustomDialogFragment extends DialogFragment {
+
+    public static class CustomDialogFragment extends DialogFragment {
         @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -43,9 +50,11 @@ public class AddActivity extends AppCompatActivity {
                     .setTitle("Вы точно хотите создать тренировку?")
                     .setIcon(R.drawable.gal)
                     .setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+
+                            Objects.requireNonNull(getActivity()).finish();
                         }
                     })
                     .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
