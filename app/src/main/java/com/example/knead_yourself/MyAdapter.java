@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,30 +16,33 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-
 
 
 
 public class MyAdapter extends SimpleCursorAdapter {
-    private  class CustomDialogFragment extends DialogFragment {
+    public static  class CustomDialogFragment1 extends DialogFragment {
+private MyAdapter adapter;
+        public CustomDialogFragment1(MyAdapter adapter) {
+            this.adapter= adapter;
+        }
+
         @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
             return builder
                     .setTitle("Вы  хотите удалите тренировку?")
-                    .setIcon(R.drawable.gal)
+                    .setIcon(R.drawable.korzina)
                     .setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
                         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            final TableTrainings tableTrainings = new TableTrainings(context);
-                            long id = MyAdapter.this.c.getLong(MyAdapter.this.c.getColumnIndex(DataBase.COLUMN_ID));
+                            final TableTrainings tableTrainings = new TableTrainings(adapter.context);
+                            long id = adapter.c.getLong(adapter.c.getColumnIndex(DataBase.COLUMN_ID));
                             tableTrainings.delete(id);
 
                         }
@@ -65,7 +67,7 @@ public class MyAdapter extends SimpleCursorAdapter {
 
 
     @Override
-    public View getView(final int pos, View inView, ViewGroup parent) {
+    public View getView(final int pos, View inView, final ViewGroup parent) {
         View v = inView;
 
         if (v == null) {
@@ -87,6 +89,8 @@ public class MyAdapter extends SimpleCursorAdapter {
                 iv.setImageResource(R.drawable.hand);
             } else if (trainingName.equals("Зарядка для глаз")) {
                 iv.setImageResource(R.drawable.eyes);
+            } else {
+                iv.setImageResource(R.drawable.star);
             }
 
             TextView title =  v.findViewById(R.id.title);
@@ -97,8 +101,9 @@ public class MyAdapter extends SimpleCursorAdapter {
             public boolean onLongClick(View v) {
                 c.moveToPosition(pos);
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-                CustomDialogFragment dialog = new CustomDialogFragment();
-                //dialog.show(context.getSupportFragmentManager(), "delete");
+                CustomDialogFragment1 dialog = new CustomDialogFragment1(MyAdapter.this);
+                dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "delete");
+                //TrainingActivity.invalidate();
                 return false;
             }
         });

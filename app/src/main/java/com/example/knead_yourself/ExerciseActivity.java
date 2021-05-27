@@ -22,6 +22,7 @@ public class ExerciseActivity extends AppCompatActivity {
     TextView score;
     Button cont;
     SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,31 +35,33 @@ public class ExerciseActivity extends AppCompatActivity {
         long idGet = (intent.getLongExtra("id", 0));
         DataBase dataBase = new DataBase(this);
         db = dataBase.getReadableDatabase();
-         final Cursor c = db.rawQuery("SELECT * FROM "+TABLE_EXERCISE+"   WHERE "+COLUMN_TRAININGS_ID+"="+ idGet,null);
-         c.moveToFirst();
-         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
-         title.setText(name);
-         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
-         description.setText(desc);
-         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
-         score.setText(scor);
-         cont.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 if (c.moveToNext()) {
-                     if (c != null) {
-                         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
-                         title.setText(name);
-                         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
-                         description.setText(desc);
-                         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
-                         score.setText(scor);
-                     }
-                 } else
-                     finish();
+        final Cursor c = db.rawQuery("SELECT * FROM " + TABLE_EXERCISE + "   WHERE " + COLUMN_TRAININGS_ID + "=" + idGet, null);
+        if (!c.isAfterLast()) {
+            c.moveToFirst();
+            String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
+            title.setText(name);
+            String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
+            description.setText(desc);
+            String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
+            score.setText(scor);
+        }
+        cont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (c.moveToNext()) {
+                    if (c != null) {
+                        String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
+                        title.setText(name);
+                        String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
+                        description.setText(desc);
+                        String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
+                        score.setText(scor);
+                    }
+                } else
+                    finish();
 
-             }
-         });
+            }
+        });
 
 
     }
