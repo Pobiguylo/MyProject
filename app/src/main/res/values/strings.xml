@@ -12,5 +12,8 @@
     <string name="scEx">  Количество повторений</string>
     <string name="conEx"> Сохранить упражнение</string>
     <string name="end"> Закончить создание</string>
-
+    <string name="time"> Введите время для уведомления</string>
+    <string name="vkl"> Включение</string>
+    <string name="yes"> Вкл</string>
+    <string name="no"> Выкл</string>
 </resources>

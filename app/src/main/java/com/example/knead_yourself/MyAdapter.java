@@ -7,15 +7,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,17 +28,16 @@ import androidx.fragment.app.DialogFragment;
 
 public class MyAdapter extends SimpleCursorAdapter {
     public static  class CustomDialogFragment1 extends DialogFragment {
-private MyAdapter adapter;
+        private MyAdapter adapter;
         public CustomDialogFragment1(MyAdapter adapter) {
             this.adapter= adapter;
         }
-
         @NonNull
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
             return builder
-                    .setTitle("Вы  хотите удалите тренировку?")
+                    .setTitle("Вы  хотите удалить тренировку?")
                     .setIcon(R.drawable.korzina)
                     .setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
                         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -44,7 +46,6 @@ private MyAdapter adapter;
                             final TableTrainings tableTrainings = new TableTrainings(adapter.context);
                             long id = adapter.c.getLong(adapter.c.getColumnIndex(DataBase.COLUMN_ID));
                             tableTrainings.delete(id);
-
                         }
                     })
                     .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -69,13 +70,12 @@ private MyAdapter adapter;
     @Override
     public View getView(final int pos, View inView, final ViewGroup parent) {
         View v = inView;
-
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.adapter_view, null);
         }
         this.c.moveToPosition(pos);
-        String trainingName = this.c.getString(this.c.getColumnIndex(DataBase.COLUMN_NAME_TRAINING));
+        final String trainingName = this.c.getString(this.c.getColumnIndex(DataBase.COLUMN_NAME_TRAINING));
         ImageView iv =  v.findViewById(R.id.imageTitle);
         if (trainingName != null) {
             // If there is no image in the database "NA" is stored instead of a blob
@@ -100,10 +100,8 @@ private MyAdapter adapter;
             @Override
             public boolean onLongClick(View v) {
                 c.moveToPosition(pos);
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                 CustomDialogFragment1 dialog = new CustomDialogFragment1(MyAdapter.this);
                 dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "delete");
-                //TrainingActivity.invalidate();
                 return false;
             }
         });
@@ -117,7 +115,6 @@ private MyAdapter adapter;
                 context.startActivity(intent);
             }
         });
-
         return(v);
     }
 }
