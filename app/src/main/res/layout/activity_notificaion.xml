@@ -6,22 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".NotificaionActivity">
 
-    <EditText
-        android:id="@+id/time"
-        android:layout_width="114dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="ЧЧ:ММ"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="@string/time"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -29,17 +18,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="382dp"
+        android:layout_height="375dp"
+        android:hapticFeedbackEnabled="false"
+        android:headerBackground="@color/colorAccent1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <Switch
+        android:theme="@style/MySwitch"
         android:id="@+id/switch1"
         android:layout_width="170dp"
         android:layout_height="57dp"
-        android:layout_marginTop="244dp"
         android:text="@string/vkl"
+        android:textColorHighlight="@color/colorAccent1"
+        android:textColorLink="@color/colorAccent1"
+        android:textCursorDrawable="@color/colorAccent1"
         android:textOff="@string/yes"
         android:textOn="@string/no"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
         app:showText="true" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

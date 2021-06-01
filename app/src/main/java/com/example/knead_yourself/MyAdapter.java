@@ -46,6 +46,8 @@ public class MyAdapter extends SimpleCursorAdapter {
                             final TableTrainings tableTrainings = new TableTrainings(adapter.context);
                             long id = adapter.c.getLong(adapter.c.getColumnIndex(DataBase.COLUMN_ID));
                             tableTrainings.delete(id);
+                            adapter.getCursor().requery();
+                            adapter.notifyDataSetInvalidated();
                         }
                     })
                     .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -102,6 +104,7 @@ public class MyAdapter extends SimpleCursorAdapter {
                 c.moveToPosition(pos);
                 CustomDialogFragment1 dialog = new CustomDialogFragment1(MyAdapter.this);
                 dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "delete");
+
                 return false;
             }
         });

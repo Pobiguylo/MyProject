@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".NotificationPublisher" android:process=":remote"/>
         <activity android:name=".NotificaionActivity"></activity>
         <activity android:name=".AddActivity" />
         <activity android:name=".ExerciseActivity" />
