@@ -2,28 +2,51 @@ package com.example.knead_yourself;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import org.json.JSONArray;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "trainings.db";
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 21;
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
-
+    public static final String TABLE_IMAGE = "IMAGE";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TRAININGS_ID="TRAININGS_ID";
+    public static final String COLUMN_TRAININGS_ID1="IMAGE_ID";
     public static final String COLUMN_NAME_TRAINING = "NAME";
     public static final String COLUMN_EXERCISE_NAME = "NAME";
     public static final String COLUMN_EXERCISE_DESCRIPTION = "DESCRIPTION";
     public static final String COLUMN_EXERCISE_SCORE = "SCORE";
+    public static final String COLUMN_IMAGE = "IMAGE";
 
     DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+//    private static class DbBitmapUtility {
+//
+//        // convert from bitmap to byte array
+//        public static byte[] getBytes(Bitmap bitmap) {
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+//            return stream.toByteArray();
+//        }
+//
+//        // convert from byte array to bitmap
+//        public static Bitmap getImage(byte[] image) {
+//            return BitmapFactory.decodeByteArray(image, 0, image.length);
+//        }
+//    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -38,9 +61,19 @@ public class DataBase extends SQLiteOpenHelper {
                 COLUMN_EXERCISE_DESCRIPTION+" TEXT,"+
                 COLUMN_EXERCISE_SCORE+" INTEGER);");
         db.execSQL(query1);
+//        String query2 = ("CREATE TABLE " + TABLE_IMAGE + " (" +
+//                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                COLUMN_TRAININGS_ID1 + " INTEGER,"+
+//                COLUMN_IMAGE+" BLOB);");
+//        db.execSQL(query2);
 
         ContentValues cv=new ContentValues();
         ContentValues cv1 = new ContentValues();
+//        ContentValues cv3=new ContentValues();
+//        cv.put(COLUMN_TRAININGS_ID1, 0);
+//        cv.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(Resources.getSystem(),R.drawable.eyes)));
+//        db.insert( TABLE_IMAGE, null, cv3 );
+
 
         Trainings tr1 = new Trainings("Зарядка для шеи");
         cv.put(COLUMN_NAME_TRAINING,tr1.getName());

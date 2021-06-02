@@ -102,7 +102,6 @@ public class AddActivity extends AppCompatActivity {
                     String s1 =descEx.getText().toString();
                     descTex.setText(s1);
                 }
-
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count,
                                               int after) {
