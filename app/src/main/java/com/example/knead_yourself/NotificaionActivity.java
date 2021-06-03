@@ -2,27 +2,25 @@ package com.example.knead_yourself;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class NotificaionActivity extends AppCompatActivity {
+    TextView textView;
     Switch aSwitch;
     TimePicker pickerTime;
     private static String CHANNEL_ID = "Cat channel";
@@ -73,8 +71,10 @@ public class NotificaionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notificaion);
         this.aSwitch = findViewById(R.id.switch1);
         this.pickerTime = findViewById(R.id.timePicker);
-
+        this.textView = findViewById(R.id.textVie);
         Calendar now = Calendar.getInstance();
+
+        textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/CutOutsFLF.ttf"));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pickerTime.setHour(now.get(Calendar.HOUR_OF_DAY));
