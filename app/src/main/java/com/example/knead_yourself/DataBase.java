@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 
 public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "trainings.db";
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 24;
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
     public static final String TABLE_IMAGE = "IMAGE";
@@ -28,25 +28,26 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String COLUMN_EXERCISE_DESCRIPTION = "DESCRIPTION";
     public static final String COLUMN_EXERCISE_SCORE = "SCORE";
     public static final String COLUMN_IMAGE = "IMAGE";
-
+    Context context;
     DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
-//    private static class DbBitmapUtility {
-//
-//        // convert from bitmap to byte array
-//        public static byte[] getBytes(Bitmap bitmap) {
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
-//            return stream.toByteArray();
-//        }
-//
-//        // convert from byte array to bitmap
-//        public static Bitmap getImage(byte[] image) {
-//            return BitmapFactory.decodeByteArray(image, 0, image.length);
-//        }
-//    }
+    private static class DbBitmapUtility {
+
+         //convert from bitmap to byte array
+        public static byte[] getBytes(Bitmap bitmap) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+            return stream.toByteArray();
+        }
+
+         //convert from byte array to bitmap
+        public static Bitmap getImage(byte[] image) {
+            return BitmapFactory.decodeByteArray(image, 0, image.length);
+        }
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -61,18 +62,18 @@ public class DataBase extends SQLiteOpenHelper {
                 COLUMN_EXERCISE_DESCRIPTION+" TEXT,"+
                 COLUMN_EXERCISE_SCORE+" INTEGER);");
         db.execSQL(query1);
-//        String query2 = ("CREATE TABLE " + TABLE_IMAGE + " (" +
-//                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                COLUMN_TRAININGS_ID1 + " INTEGER,"+
-//                COLUMN_IMAGE+" BLOB);");
-//        db.execSQL(query2);
+        String query2 = ("CREATE TABLE " + TABLE_IMAGE + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_TRAININGS_ID1 + " INTEGER,"+
+                COLUMN_IMAGE+" BLOB);");
+        db.execSQL(query2);
 
         ContentValues cv=new ContentValues();
         ContentValues cv1 = new ContentValues();
-//        ContentValues cv3=new ContentValues();
-//        cv.put(COLUMN_TRAININGS_ID1, 0);
-//        cv.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(Resources.getSystem(),R.drawable.eyes)));
-//        db.insert( TABLE_IMAGE, null, cv3 );
+        ContentValues cv3=new ContentValues();
+        cv.put(COLUMN_TRAININGS_ID1, 0);
+        cv.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.eyesan)));
+       db.insert( TABLE_IMAGE, null, cv3 );
 
 
         Trainings tr1 = new Trainings("Зарядка для шеи");
@@ -302,6 +303,7 @@ public class DataBase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_IMAGE);
         onCreate(db);
     }
 

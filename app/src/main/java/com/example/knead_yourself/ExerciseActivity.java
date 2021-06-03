@@ -49,18 +49,18 @@ public class ExerciseActivity extends AppCompatActivity {
         DataBase dataBase = new DataBase(this);
         db = dataBase.getReadableDatabase();
         final Cursor c = db.rawQuery("SELECT * FROM " + TABLE_EXERCISE + "   WHERE " + COLUMN_TRAININGS_ID + "=" + idGet, null);
-       // final Cursor c1 = db.rawQuery("SELECT * FROM " + TABLE_IMAGE + "   WHERE " + COLUMN_TRAININGS_ID1 + "=" + idGet, null);
+        final Cursor c1 = db.rawQuery("SELECT * FROM " + TABLE_IMAGE + "   WHERE " + COLUMN_TRAININGS_ID1 + "=" + idGet, null);
         if (!c.isAfterLast() ) {
             c.moveToFirst();
-            //c1.moveToFirst();
+            c1.moveToFirst();
             String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
             title.setText(name);
             String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
             description.setText(desc);
             String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
             score.setText(scor);
-//            byte[] image = c1.getBlob(0);
-//            imageView.setImageBitmap(getImage(image));
+            byte[] image = c1.getBlob(2);
+            imageView.setImageBitmap(getImage(image));
         }
         cont.setOnClickListener(new View.OnClickListener() {
             @Override

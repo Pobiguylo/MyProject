@@ -42,7 +42,7 @@ public class NotificaionActivity extends AppCompatActivity {
                 new NotificationCompat.Builder(NotificaionActivity.this, CHANNEL_ID)
                         .setAutoCancel(true)
                         .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(android.R.drawable.sym_def_app_icon)
+                        .setSmallIcon(R.drawable.time)
                         .setContentTitle("Пора работать")
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(randomWords[n]))
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -74,7 +74,7 @@ public class NotificaionActivity extends AppCompatActivity {
         this.textView = findViewById(R.id.textVie);
         Calendar now = Calendar.getInstance();
 
-        textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/CutOutsFLF.ttf"));
+        textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ofont.ru_a_FuturaRound.ttf"));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pickerTime.setHour(now.get(Calendar.HOUR_OF_DAY));

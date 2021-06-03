@@ -85,12 +85,12 @@ public class MyAdapter extends SimpleCursorAdapter {
             // there is an image otherwise load the default
             if(trainingName.equals("Зарядка для шеи"))
             {
-                iv.setImageResource(R.drawable.head);
+                iv.setImageResource(R.drawable.shei);
             } else if(trainingName.equals("Разминка для рук и плеч"))
             {
-                iv.setImageResource(R.drawable.hand);
+                iv.setImageResource(R.drawable.hands);
             } else if (trainingName.equals("Зарядка для глаз")) {
-                iv.setImageResource(R.drawable.eyes);
+                iv.setImageResource(R.drawable.eyesan);
             } else {
                 iv.setImageResource(R.drawable.star);
             }
