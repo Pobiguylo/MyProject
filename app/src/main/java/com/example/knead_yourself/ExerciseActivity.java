@@ -45,7 +45,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        long idGet = (intent.getLongExtra("id", 0));
+        final long idGet = (intent.getLongExtra("id", 0));
         DataBase dataBase = new DataBase(this);
         db = dataBase.getReadableDatabase();
         final Cursor c = db.rawQuery("SELECT * FROM " + TABLE_EXERCISE + "   WHERE " + COLUMN_TRAININGS_ID + "=" + idGet, null);
@@ -65,14 +65,16 @@ public class ExerciseActivity extends AppCompatActivity {
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (c.moveToNext() ) {
-                    if (c != null) {
+                if (c.moveToNext() && c1.moveToNext() ) {
+                    if (c != null && c1 !=null ) {
                         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
                         title.setText(name);
                         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
                         description.setText(desc);
                         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
                         score.setText(scor);
+                        byte[] image = c1.getBlob(2);
+                        imageView.setImageBitmap(getImage(image));
                     }
                 } else
                     finish();

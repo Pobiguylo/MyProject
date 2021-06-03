@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 
 public class DataBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "trainings.db";
-    private static final int DATABASE_VERSION = 24;
+    private static final int DATABASE_VERSION = 41;
     public static final String TABLE_NAME = "TRAININGS";
     public static final String TABLE_EXERCISE = "EXERCISE";
     public static final String TABLE_IMAGE = "IMAGE";
@@ -71,10 +71,74 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues cv=new ContentValues();
         ContentValues cv1 = new ContentValues();
         ContentValues cv3=new ContentValues();
-        cv.put(COLUMN_TRAININGS_ID1, 0);
-        cv.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.eyesan)));
-       db.insert( TABLE_IMAGE, null, cv3 );
 
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex1)));
+        long exI1 = db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex2)));
+        long exI2 = db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex3)));
+        long exI3= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex4)));
+        long exI4= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex5)));
+        long exI5= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 1);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex6)));
+        long exI6= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI7= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI8= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI9= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI10= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI11= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 2);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI12= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 3);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI13= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 3);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI14= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 3);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI15= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 3);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI16= db.insert( TABLE_IMAGE, null, cv3 );
+
+        cv3.put(COLUMN_TRAININGS_ID1, 3);
+        cv3.put(COLUMN_IMAGE, DbBitmapUtility.getBytes( BitmapFactory.decodeResource(context.getResources(),R.drawable.ex7)));
+        long exI17= db.insert( TABLE_IMAGE, null, cv3 );
 
         Trainings tr1 = new Trainings("Зарядка для шеи");
         cv.put(COLUMN_NAME_TRAINING,tr1.getName());
