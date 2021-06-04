@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,6 +80,8 @@ public class MyAdapter extends SimpleCursorAdapter {
         this.c.moveToPosition(pos);
         final String trainingName = this.c.getString(this.c.getColumnIndex(DataBase.COLUMN_NAME_TRAINING));
         ImageView iv =  v.findViewById(R.id.imageTitle);
+        TextView title =  v.findViewById(R.id.title);
+
         if (trainingName != null) {
             // If there is no image in the database "NA" is stored instead of a blob
             // test if there more than 3 chars "NA" + a terminating char if more than
@@ -95,8 +98,8 @@ public class MyAdapter extends SimpleCursorAdapter {
                 iv.setImageResource(R.drawable.star);
             }
 
-            TextView title =  v.findViewById(R.id.title);
             title.setText(trainingName);
+            title.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/simpletext.ttf"));
         }
         v.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

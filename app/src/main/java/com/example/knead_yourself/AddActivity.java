@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -92,6 +93,7 @@ public class AddActivity extends AppCompatActivity {
                         trainings = new Trainings(nameTr.getText().toString());
                         cv.put(COLUMN_NAME_TRAINING, trainings.getName());
                         trID[0] = db.insert(TABLE_NAME, null, cv);
+                        Toast.makeText(AddActivity.this, "Тренировка создана", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -100,6 +102,7 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     String s1 =descEx.getText().toString();
+                    descTex.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
                     descTex.setText(s1);
                 }
                 @Override
@@ -128,6 +131,7 @@ public class AddActivity extends AppCompatActivity {
                             nameEx.setText("");
                             descEx.setText("");
                             scoreEx.setText("");
+                            Toast.makeText(AddActivity.this, "Упражнение создано", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

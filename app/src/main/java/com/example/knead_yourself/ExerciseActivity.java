@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,27 +55,38 @@ public class ExerciseActivity extends AppCompatActivity {
             c.moveToFirst();
             c1.moveToFirst();
             String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
+            title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
             title.setText(name);
             String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
+            description.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
             description.setText(desc);
             String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
+            score.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
             score.setText(scor);
+            if (!c1.isAfterLast() ){
             byte[] image = c1.getBlob(2);
             imageView.setImageBitmap(getImage(image));
+            }else{
+                imageView.setImageResource(0);
+            }
         }
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (c.moveToNext() && c1.moveToNext() ) {
-                    if (c != null && c1 !=null ) {
+                if (c.moveToNext()  ) {
+                    if (c != null  ) {
                         String name = c.getString(c.getColumnIndex(COLUMN_EXERCISE_NAME));
                         title.setText(name);
                         String desc = c.getString(c.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION));
                         description.setText(desc);
                         String scor = c.getString(c.getColumnIndex(COLUMN_EXERCISE_SCORE));
                         score.setText(scor);
-                        byte[] image = c1.getBlob(2);
-                        imageView.setImageBitmap(getImage(image));
+                        if (c1.moveToNext()) {
+                            byte[] image = c1.getBlob(2);
+                            imageView.setImageBitmap(getImage(image));
+                        } else{
+                            imageView.setImageResource(0);
+                        }
                     }
                 } else
                     finish();

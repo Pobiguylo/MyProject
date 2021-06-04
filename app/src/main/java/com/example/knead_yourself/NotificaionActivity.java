@@ -74,7 +74,8 @@ public class NotificaionActivity extends AppCompatActivity {
         this.textView = findViewById(R.id.textVie);
         Calendar now = Calendar.getInstance();
 
-        textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ofont.ru_a_FuturaRound.ttf"));
+        aSwitch.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
+        textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             pickerTime.setHour(now.get(Calendar.HOUR_OF_DAY));

@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 
 public class TrainingActivity extends AppCompatActivity {
     ListView listView;
     SQLiteDatabase db;
     Cursor userCursor;
+    TextView list;
     SimpleCursorAdapter userAdapter;
     DataBase dataBase;
     @Override
@@ -21,6 +24,8 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         this.listView = findViewById(R.id.listview);
+        this.list = findViewById(R.id.List);
+        list.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
          dataBase = new DataBase(getApplicationContext());
 
     }

@@ -3,21 +3,24 @@ package com.example.knead_yourself;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Button begin,add,progress,not;
+    TextView title;
+    Button begin,add,not;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.hello_main);
         this.begin =findViewById(R.id.start);
         this.add =findViewById(R.id.add);
-        this.progress =findViewById(R.id.progress);
         this.not = findViewById(R.id.notification);
+        this.title = findViewById(R.id.title);
+        title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/title1.ttf"));
         begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
