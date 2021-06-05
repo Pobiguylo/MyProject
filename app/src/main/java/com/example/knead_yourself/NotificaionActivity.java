@@ -5,6 +5,8 @@ import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +27,14 @@ public class NotificaionActivity extends AppCompatActivity {
     TimePicker pickerTime;
     private static String CHANNEL_ID = "Cat channel";
 
+    public static void createChannelIfNeeded(NotificationManager manager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
+            manager.createNotificationChannel(notificationChannel);
+        }
+    }
     private Notification getNotification() {
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         Intent notificationIntent = new Intent(NotificaionActivity.this, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(NotificaionActivity.this,
                0, notificationIntent,
@@ -42,12 +51,12 @@ public class NotificaionActivity extends AppCompatActivity {
                 new NotificationCompat.Builder(NotificaionActivity.this, CHANNEL_ID)
                         .setAutoCancel(true)
                         .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.drawable.time)
+                        .setSmallIcon(R.drawable.clock)
                         .setContentTitle("Пора работать")
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(randomWords[n]))
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setContentIntent(contentIntent);
-
+                        createChannelIfNeeded(notificationManager);
         return builder.build();
     }
 
@@ -65,6 +74,8 @@ public class NotificaionActivity extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +84,6 @@ public class NotificaionActivity extends AppCompatActivity {
         this.pickerTime = findViewById(R.id.timePicker);
         this.textView = findViewById(R.id.textVie);
         Calendar now = Calendar.getInstance();
-
         aSwitch.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
         textView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/simpletext.ttf"));
 
